@@ -1,0 +1,10 @@
+spring:
+  data:
+    mongodb:
+      host: database
+      database: project-master
+      password: root
+      username: root
+
+
+

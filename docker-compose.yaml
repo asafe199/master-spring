@@ -1,0 +1,42 @@
+version: "3.1"
+
+services:
+  java:
+    build:
+      context: ./
+    ports:
+      - "8080:8080"
+    container_name: java
+    links:
+      - mongo
+    depends_on:
+      - mongo
+    networks:
+      - shared-net
+
+  mongo:
+    container_name: mongo
+    image: mongo
+    restart: unless-stopped
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: root
+      MONGO_INITDB_DATABASE: master
+    ports:
+      - 27017:27017
+    volumes:
+      - mongo:/data/db
+    networks:
+      - shared-net
+
+networks:
+  shared-net:
+    driver: bridge
+
+volumes:
+  mongo:
+
+
+
+
+
