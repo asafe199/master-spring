@@ -24,8 +24,8 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User get(String id) {
-        Optional<User> userOptional = Optional.of(userRespository.findById(id)).orElseThrow(ResultNotFoundException::new);
-        return userOptional.get();
+        Optional<User> userOptional = userRespository.findById(id);
+        return userOptional.orElseGet(() -> userOptional.orElseThrow(ResultNotFoundException::new));
     }
 
     @Override

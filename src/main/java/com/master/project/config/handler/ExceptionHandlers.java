@@ -22,6 +22,6 @@ public class ExceptionHandlers extends ResponseEntityExceptionHandler {
     protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex, HttpHeaders headers, HttpStatus status, WebRequest request) {
         List<FieldError> fieldErrors = ex.getBindingResult().getFieldErrors();
         String fieldsMessage = fieldErrors.stream().map(FieldError::getDefaultMessage).collect(Collectors.joining(", "));
-        return ResponseEntity.badRequest().body(ExceptionDetails.builder().message(fieldsMessage).statusCode(HttpStatus.BAD_REQUEST.value()).time(LocalDateTime.now()));
+        return ResponseEntity.badRequest().body(ExceptionDetails.builder().message(fieldsMessage).statusCode(HttpStatus.BAD_REQUEST.value()).time(LocalDateTime.now()).build());
     }
 }

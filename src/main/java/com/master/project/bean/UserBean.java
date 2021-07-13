@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import java.io.Serializable;
 
@@ -12,12 +13,13 @@ import java.io.Serializable;
 @AllArgsConstructor
 public class UserBean implements Serializable {
     private String id;
-    @NotEmpty(message = "name can't be empty")
+    @NotEmpty(message = "Name can't be empty")
     private String name;
-    @NotEmpty(message = "email can't be empty")
+    @NotEmpty(message = "Email can't be empty")
+    @Email(message = "Email must be valid")
     private String email;
-    @NotEmpty(message = "lastName can't be empty")
+    @NotEmpty(message = "LastName can't be empty")
     private String lastName;
-    @NotEmpty(message = "password can't be empty")
+    @NotEmpty(message = "Password can't be empty")
     private String password;
 }
