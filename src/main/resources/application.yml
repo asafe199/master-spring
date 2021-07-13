@@ -1,16 +1,14 @@
 spring:
+  profiles:
+    active: @active@
   data:
     mongodb:
-      database: master
-      password: rootpass
-      username: rootuser
-      host: localhost
-      port: 27017
       authentication-database: admin
+      uri: @uri.mongo@
 
 server:
   servlet:
-    context-path: /master
+    context-path: @context@
 
 
 

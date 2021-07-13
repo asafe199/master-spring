@@ -10,7 +10,7 @@
     </parent>
     <groupId>com.master</groupId>
     <artifactId>project</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>1.0.0-SNAPSHOT</version>
 
     <name>master-spring</name>
 
@@ -20,6 +20,7 @@
         <springfox.version>3.0.0</springfox.version>
         <maven.compiler.source>11</maven.compiler.source>
         <maven.compiler.target>11</maven.compiler.target>
+        <context>/master</context>
     </properties>
     <dependencies>
         <dependency>
@@ -69,8 +70,28 @@
         </dependency>
     </dependencies>
 
+    <profiles>
+        <profile>
+            <id>dev</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <properties>
+                <active>dev</active>
+                <uri.mongo>mongodb://localhost/master</uri.mongo>
+            </properties>
+        </profile>
+        <profile>
+            <id>prod</id>
+            <properties>
+                <active>prod</active>
+                <uri.mongo>mongodb+srv://root:Mongo10@cluster.48q1g.mongodb.net/master?retryWrites=true&amp;w=majority
+                </uri.mongo>
+            </properties>
+        </profile>
+    </profiles>
     <build>
-        <finalName>master-spring</finalName>
+        <finalName>spring-master</finalName>
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
@@ -82,6 +103,14 @@
                             <artifactId>lombok</artifactId>
                         </exclude>
                     </excludes>
+                </configuration>
+            </plugin>
+            <plugin>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.8.1</version>
+                <configuration>
+                    <source>${maven.compiler.source}</source>
+                    <target>${maven.compiler.target}</target>
                 </configuration>
             </plugin>
         </plugins>
