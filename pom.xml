@@ -78,12 +78,8 @@
     <profiles>
         <profile>
             <id>dev</id>
-            <activation>
-                <activeByDefault>false</activeByDefault>
-            </activation>
             <properties>
-                <active>dev</active>
-                <uri.mongo>mongodb://localhost/master</uri.mongo>
+                <profile>dev</profile>
             </properties>
         </profile>
         <profile>
@@ -92,14 +88,24 @@
                 <activeByDefault>true</activeByDefault>
             </activation>
             <properties>
-                <active>prod</active>
-                <uri.mongo>mongodb+srv://root:Mongo10@cluster.48q1g.mongodb.net/master?retryWrites=true&amp;w=majority
-                </uri.mongo>
+                <profile>prod</profile>
             </properties>
         </profile>
     </profiles>
     <build>
         <finalName>spring-master</finalName>
+        <filters>
+            <filter>src/main/resources/filters/${profile}.properties</filter>
+        </filters>
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <filtering>true</filtering>
+                <includes>
+                    <include>**/*</include>
+                </includes>
+            </resource>
+        </resources>
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>

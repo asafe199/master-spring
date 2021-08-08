@@ -1,10 +1,10 @@
 spring:
   profiles:
-    active: @active@
+    active: @profile@
   data:
     mongodb:
       authentication-database: admin
-      uri: @uri.mongo@
+      uri: @mongo@
 
 server:
   servlet:
